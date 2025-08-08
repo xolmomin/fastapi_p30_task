@@ -29,7 +29,7 @@ class Database:
 
     def init(self):
         self._engine = create_async_engine(settings.postgres_async_url)
-        self._session = async_sessionmaker(self._engine)()
+        self._session = async_sessionmaker(self._engine, expire_on_commit=False)()
 
     def __getattr__(self, name):
         return getattr(self._session, name)
@@ -47,7 +47,6 @@ db = Database()
 db.init()
 
 
-#     get, update, create, delete
 class AbstractClass:
     @staticmethod
     async def commit():
