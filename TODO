@@ -1,0 +1,58 @@
+
+
+
+400
+401
+403
+404
+405
+422
+
+post, patch, put
+get, delete, options, head
+
+"""
+django          fastapi
+models          models(sqlalchemy)
+serializers     schemas(pydantic)
+views           services
+admins          ❌
+urls            routers
+
+
+"""
+
+1chi
+api/users get
+
+2chi
+https://jsonplaceholder.typicode.com/users
+
+10.30.8.174
+ifconfig
+ipconfig
+uv add httpx
+uv remove httpx
+
+venv -> uv
+json -> orjson
+requests -> httpx (async)
+
+django -> fastapi
+
+
+
+
+python(os, sys, hash, itertools, collections, ctypes, argparse)
+postgres(asyncpg, psycopg2)
+sqlalchemy(alembic)
+pydantic(class, dataclasses)
+
+fastapi, devops
+
+
+pydantic settings config
+postgres (sqlalchemy[])
+
+
+
