@@ -56,3 +56,15 @@ postgres (sqlalchemy[])
 
 
 
+
+#Homework
+
+users, posts, comments
+
+
+
+alembic
+
+
+
+

@@ -1,8 +1,8 @@
 from datetime import datetime
 
 from sqlalchemy import DateTime, func, update as sqlalchemy_update, select, delete as sqlalchemy_delete
-from sqlalchemy.ext.asyncio import AsyncAttrs, create_async_engine, async_sessionmaker, AsyncSession
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr, sessionmaker
+from sqlalchemy.ext.asyncio import AsyncAttrs, create_async_engine, async_sessionmaker
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr
 
 from core.config import settings
 
