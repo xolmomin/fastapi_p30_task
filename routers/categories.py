@@ -1,35 +1,57 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from starlette import status
 from starlette.responses import JSONResponse
 
 from database import Category
-from schemas.categories import CreateCategory, ReadCategory, UpdateCategory
+from schemas.categories import CreateCategory, ReadCategory, UpdateCategory, ResponseSchema
 
 category_router = APIRouter()
 
 
 @category_router.get('/category')
 async def get_categories():
-    return await Category.get_all()
+    categories = await Category.get_all()
+    return ResponseSchema[list[ReadCategory]](
+        message='all categories',
+        data=categories
+    )
 
 
 @category_router.get('/category/{id}')
 async def get_category(id: int):
-    return await Category.get(id)
+    category = await Category.get(id)
+    if category is None:
+        return JSONResponse(
+            status_code=status.HTTP_404_NOT_FOUND,
+            content={'message': 'category not found', 'data': None}
+        )
+    return ResponseSchema[ReadCategory](
+        message='Category detail',
+        data=category
+    )
 
 
 @category_router.patch('/category/{id}')
 async def get_categories(id: int, data: UpdateCategory):
-    await Category.update(id, **data.model_dump(exclude_unset=True))
-    return {'message': f'Category {id} updated'}
+    update_category = await Category.update(id, **data.model_dump(exclude_unset=True))
+    return ResponseSchema[UpdateCategory](
+        message='Category updated',
+        data=update_category
+    )
 
 
 @category_router.delete('/category/{id}')
 async def get_categories(id: int):
     await Category.delete(id)
-    return {'message': f'Category {id} deleted'}
+    return ResponseSchema(
+        message=f"Category {id} deleted"
+    )
 
 
-@category_router.post('/category', response_model=ReadCategory)
+@category_router.post('/category')
 async def get_categories(data: CreateCategory):
-    return await Category.create(**data.model_dump())
+    category = await Category.create(**data.model_dump())
+    return ResponseSchema[ReadCategory](
+        message=f'Category {category.id} created',
+        data=category
+    )

@@ -70,9 +70,11 @@ class AbstractClass:
             .where(cls.id == id_)
             .values(**kwargs)
             .execution_options(synchronize_session="fetch")
+            .returning(cls)
         )
-        await db.execute(query)
+        new_obj = await db.execute(query)
         await cls.commit()
+        return new_obj.scalar()
 
     @classmethod
     async def get(cls, id_):
