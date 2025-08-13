@@ -54,18 +54,3 @@ async def get_me_view(current_user: User = Depends(get_current_user)):
 #         message=f'Category {category.id} created',
 #         data=category
 #     )
-
-
-"""
-
-400 (422)
-401
-403
-404
-405
-
-
-
-
-
-"""
