@@ -3,7 +3,7 @@ from starlette import status
 from starlette.responses import JSONResponse
 
 from database import Category
-from schemas.categories import CreateCategory, ReadCategory, UpdateCategory, ResponseSchema
+from schemas import CreateCategory, ReadCategory, UpdateCategory, ResponseSchema
 
 category_router = APIRouter()
 

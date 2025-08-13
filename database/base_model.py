@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import DateTime, func, update as sqlalchemy_update, select, delete as sqlalchemy_delete
 from sqlalchemy.ext.asyncio import AsyncAttrs, create_async_engine, async_sessionmaker
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr, selectinload
 
 from core.config import settings
 
@@ -18,6 +18,8 @@ class Base(AsyncAttrs, DeclarativeBase):
             _new_name += i
         if _new_name[-1] == 'y':
             _new_name = _new_name[:-1] + 'ies'
+        else:
+            _new_name += 's'
         return _new_name.lower()
 
 
@@ -90,6 +92,14 @@ class AbstractClass:
     @classmethod
     async def get_all(cls):
         return (await db.execute(select(cls))).scalars()
+
+    @classmethod
+    async def filter(cls, criteria, *, relationship=None):
+        query = select(cls).where(criteria)
+        if relationship:
+            query = query.options(selectinload(relationship))
+
+        return (await db.execute(query)).scalars().all()
 
 
 class Model(Base, AbstractClass):

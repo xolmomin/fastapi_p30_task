@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
 
-class CreateCategory(BaseModel):
+class CreateProduct(BaseModel):
     name: str
 
 
-class UpdateCategory(BaseModel):
+class UpdateProduct(BaseModel):
     name: str | None = None
 
     class Config:
