@@ -1,6 +1,11 @@
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from fastapi.exceptions import RequestValidationError
+from pydantic import ValidationError
+from starlette import status
+from starlette.requests import Request
+from starlette.responses import JSONResponse
 
 from database.base_model import db
 from routers import router
@@ -16,5 +21,15 @@ async def lifespan(_app: FastAPI):
 
 
 app = FastAPI(docs_url='/', root_path='/api', title="P30 FastAPI", lifespan=lifespan)
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    msg = exc.args[0][0]['msg']
+    return JSONResponse(
+        {'message': msg},
+        status.HTTP_400_BAD_REQUEST,
+    )
+
 
 app.include_router(router)

@@ -8,15 +8,10 @@ from starlette import status
 from starlette.responses import JSONResponse
 
 from database import Category, User
+from schemas.users import LoginForm
 from utils.security import create_access_token, verify_password, get_current_user
 
 user_router = APIRouter()
-
-
-class LoginForm(BaseModel):
-    username: str = Field(..., min_length=1, examples=['botir'])
-    password: str = Field(..., min_length=1, examples=['123'])
-
 
 @user_router.post('/login')
 async def login_view(data: LoginForm):

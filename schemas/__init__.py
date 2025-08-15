@@ -2,6 +2,7 @@ from typing import TypeVar, Generic
 
 from pydantic import BaseModel
 
+from schemas.auth import RegisterForm
 from schemas.categories import CreateCategory, ReadCategory, UpdateCategory
 from schemas.products import CreateProduct
 
@@ -18,5 +19,6 @@ __all__ = [
     'CreateCategory',
     'ReadCategory',
     'CreateProduct',
-    'UpdateCategory'
+    'UpdateCategory',
+    'RegisterForm',
 ]
