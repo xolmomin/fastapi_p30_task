@@ -96,25 +96,26 @@ updated_by
 
 
 alembic
-pagination
 
 
 
-register
-1. sms (redis)
 
-2. email
+
 
 
 
 
 #Homework
+register
+1. sms (redis)
+2. email (gmail - code, link)
+3. pdp certificate generate qilish
 
-1. pdp certificate generate qilish
-2.
+api/users/generate-certificate
+post (first_name, last_name)
 
-
-
+(celery, background task)
+pagination, filter, search, order by universal
 
 docker run --name postgres_container -e POSTGRES_PASSWORD=1 -p 5432:5432 -d postgres:alpine
 docker run --name redis_container -p 6379:6379 -d redis:alpine
