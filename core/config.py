@@ -16,8 +16,10 @@ class Settings(BaseSettings):
     JWT_ACCESS_TOKEN_EXPIRE_TIME: int = Field(default=60)
     JWT_REFRESH_TOKEN_EXPIRE_TIME: int = Field(default=3600)
 
-    USER_EMAIL: EmailStr = Field()
-    PASSWORD_EMAIL: str = Field()
+    EMAIL_HOST: str = Field('smtp.gmail.com')
+    EMAIL_PORT: int = Field(465)
+    EMAIL_USER: EmailStr = Field()
+    EMAIL_PASSWORD: str = Field()
 
     @property
     def postgres_sync_url(self):
