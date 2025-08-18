@@ -120,3 +120,60 @@ pagination, filter, search, order by universal
 docker run --name postgres_container -e POSTGRES_PASSWORD=1 -p 5432:5432 -d postgres:alpine
 docker run --name redis_container -p 6379:6379 -d redis:alpine
 
+
+
+alembic init -t async migrations
+
+print(Base.metadata.tables.keys())
+
+
+
+
+evos
+categories
+products
+orders (cash, online)
+
+
+id = (1 ... n)
+
+
+POST api/login (admin login qilish uchun)
+python script yozib qoyamiz
+(
+username='admin'
+password=123
+)
+
+
+POST api/categories (category qoshish) (auth)
+POST api/products (product qoshish) (auth)
+
+
+GET  api/products (productlar royhatini olish)
+
+POST api/orders   (burger zakaz qilish)
+
+{
+    "order_items": {
+        "1": 4,
+        "2": 2
+    },
+    "payment_method": "cash"
+}
+
+POST api/orders/check (order_id)
+GET  api/orders   (hozirgi faol zakazlar)
+
+
+
+1 qora burger (30)
+2 pepsi (15)
+
+
+
+
+
+https://testdriven.io/blog/fastapi-and-celery/
+
+
