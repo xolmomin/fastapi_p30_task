@@ -12,6 +12,7 @@ dependencies = [
     "httpx>=0.28.1",
     "orjson>=3.11.2",
     "passlib>=1.7.4",
+    "pillow>=11.3.0",
     "pydantic-settings>=2.10.1",
     "pydantic[email]>=2.11.7",
     "python-jose[cryptography]>=3.5.0",
